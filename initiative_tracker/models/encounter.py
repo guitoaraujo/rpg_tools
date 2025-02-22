@@ -17,3 +17,7 @@ class Encounter(models.Model):
 
     def __str__(self):
         return f"Encontro {self.id} - Rodada {self.round_number}"
+
+    def ordered_characters(self):
+        """Returns the characters ordered by initiative"""
+        return self.characters.all().order_by('initiative')

@@ -1,0 +1,67 @@
+{% extends 'initiative_tracker/base.html' %}
+
+{% block title %}Encounter Details{% endblock %}
+
+{% block content %}
+    <h4 class="center-align">Encounter: {{ encounter.name }}</h4>
+    
+    <h5>Characters Ordered by Initiative</h5>
+    <ul class="collection">
+        {% for character in characters %}
+            <li class="collection-item">
+                <span>{{ character.name }} - Initiative: {{ character.initiative }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h5>Add Character to Encounter</h5>
+    <form action="{% url 'encounter_detail' encounter.pk %}" method="POST">
+        {% csrf_token %}
+        <div class="input-field">
+            <select name="character">
+                <option value="" disabled selected>Select Character</option>
+                {% for character in characters %}
+                    <option value="{{ character.pk }}">{{ character.name }}</option>
+                {% endfor %}
+            </select>
+            <label>Select Character</label>
+        </div>
+        <button type="submit" class="btn waves-effect waves-light blue">Add to Encounter</button>
+    </form>
+
+    <h5>Change Character Initiative</h5>
+    <form id="change-initiative-form" method="POST">
+        {% csrf_token %}
+        <input type="number" name="initiative" id="initiative" placeholder="New Initiative">
+        <button type="submit" class="btn waves-effect waves-light red">Change Initiative</button>
+    </form>
+{% endblock %}
+
+<script>
+    $(document).ready(function() {
+        $('#change-initiative-form').submit(function(event) {
+            event.preventDefault();
+
+            const initiative = $('#initiative').val();
+            const characterId = $('#character-id').val(); // This value should be dynamically set
+
+            $.ajax({
+                url: '/change_initiative/' + characterId + '/',
+                method: 'POST',
+                data: {
+                    'initiative': initiative,
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                },
+                success: function(response) {
+                    if(response.success) {
+                        alert('Initiative updated to: ' + response.initiative);
+                        location.reload(); // Reload the page to reflect the new initiative order
+                    }
+                },
+                error: function() {
+                    alert('Error updating initiative');
+                }
+            });
+        });
+    });
+</script>

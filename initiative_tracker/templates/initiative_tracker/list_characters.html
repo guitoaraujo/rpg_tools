@@ -1,0 +1,17 @@
+{% extends 'initiative_tracker/base.html' %}
+
+{% block title %}Character List{% endblock %}
+
+{% block content %}
+    <h4 class="center-align">Character List</h4>
+    <a href="{% url 'create_character' %}" class="btn waves-effect waves-light blue">Create Character</a>
+    <ul class="collection">
+        {% for character in characters %}
+            <li class="collection-item">
+                <span>{{ character.name }} - Initiative: {{ character.initiative }}</span>
+                <a href="{% url 'edit_character' character.pk %}" class="secondary-content"><i class="material-icons">edit</i></a>
+                <a href="{% url 'delete_character' character.pk %}" class="secondary-content"><i class="material-icons">delete</i></a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

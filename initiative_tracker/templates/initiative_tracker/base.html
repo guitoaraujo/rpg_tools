@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RPG Tools{% endblock %}</title>
+
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Styles (optional) -->
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{% url 'home' %}" class="brand-logo center">RPG Tools</a>
+            <ul class="left hide-on-med-and-down">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'list_characters' %}">Characters</a></li>
+                <li><a href="{% url 'create_encounter' %}">Encounters</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    {% block content %}{% endblock %}
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+
+</html>
