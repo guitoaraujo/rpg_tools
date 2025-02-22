@@ -1,0 +1,13 @@
+{% extends 'initiative_tracker/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h2>Are you sure you want to delete "{{ character.name }}"?</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn red">Delete</button>
+            <a href="{% url 'list_characters' %}" class="btn grey">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

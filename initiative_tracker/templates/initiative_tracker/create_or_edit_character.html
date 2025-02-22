@@ -12,7 +12,7 @@
             <!-- Player Name Field -->
             <div class="input-field">
                 <label for="player_name">Player Name</label>
-                <input type="text" id="player_name" name="player_name" value="{{ form.player_name.value }}" required>
+                <input type="text" id="player_name" name="player_name" placeholder="Enter Player Name" value="{{ form.player_name.value|default_if_none:'' }}" required>
                 {% if form.player_name.errors %}
                     <div class="error">
                         {% for error in form.player_name.errors %}
@@ -25,7 +25,7 @@
             <!-- Character Name Field -->
             <div class="input-field">
                 <label for="name">Character Name</label>
-                <input type="text" id="name" name="name" value="{{ form.name.value }}" required>
+                <input type="text" id="name" name="name" placeholder="Enter Character Name" value="{{ form.name.value|default_if_none:'' }}" required>
                 {% if form.name.errors %}
                     <div class="error">
                         {% for error in form.name.errors %}
@@ -38,7 +38,7 @@
             <!-- Initiative Field -->
             <div class="input-field">
                 <label for="initiative">Initiative</label>
-                <input type="number" id="initiative" name="initiative" value="{{ form.initiative.value }}">
+                <input type="number" id="initiative" name="initiative" value="{{ form.initiative.value|default_if_none:0 }}">
                 {% if form.initiative.errors %}
                     <div class="error">
                         {% for error in form.initiative.errors %}

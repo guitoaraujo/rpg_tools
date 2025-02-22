@@ -33,8 +33,8 @@ def create_or_edit_character(request, id=None):
     return render(request, 'initiative_tracker/create_or_edit_character.html', {'form': form})
 
 # Delete character
-def delete_character(request, pk):
-    character = get_object_or_404(Character, pk=pk)
+def delete_character(request, id):
+    character = get_object_or_404(Character, id=id)
     if request.method == 'POST':
         character.delete()
         return redirect('list_characters')

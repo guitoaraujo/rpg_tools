@@ -2,6 +2,16 @@
 
 {% block title %}Character List{% endblock %}
 
+{% if messages %}
+    <div class="container">
+        {% for message in messages %}
+        <div class="card-panel {{ message.tags }} lighten-4 {{ message.tags }}-text text-darken-4">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
 {% block content %}
     <h4 class="center-align">Character List</h4>
     <a href="{% url 'create_character' %}" class="btn waves-effect waves-light blue">Create Character</a>
